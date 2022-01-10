@@ -20,21 +20,39 @@ const CampaignTitle = styled.textarea`
   height: 90px;
   width: calc(100% - 20px);
 `
-const CampaignSkuId = styled(Input)`
+const InputId = styled(Input)`
   margin: 10px;
-  width: calc(42% - 10px);
+  width: calc(100% - 20px);
   height: 45px;
+  @media (min-width: 768px) {
+    width: calc(42% - 10px);
+  }
 `
-const CampaignProgrammeId = styled(Input)`
-  margin: 10px;
-  width: calc(42% - 10px);
-  height: 45px;
+// const InputId = styled(Input)`
+//   margin: 10px;
+//   width: calc(100% - 20px);
+//   height: 45px;
+//   @media (min-width: 768px) {
+//     width: calc(42% - 10px);
+//   }
+// `
+const CampaignInputWrapper = styled.div`
+  display: block;
+  @media (min-width: 768px) {
+    display: flex;
+  }
 `
-
 const AddButton = styled(Button)`
   height: 45px;
-  width: 10%;
+  width: 100px;
   margin: 10px;
+  @media (min-width: 768px) {
+    width: 10%;
+  }
+`
+const CenterContent = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 export const Campaign = () => {
@@ -48,17 +66,26 @@ export const Campaign = () => {
     setSkuId(e?.target?.value)
   }
 
-  const [programmeId, setProgrammeId] = useState('')
+  const [programmeID, setProgrammeId] = useState('')
   const handleProgrammeIdChange = (e) => {
     setProgrammeId(e?.target?.value)
   }
-
+  const [isAddProductModalOpen, setAddProductModal] = useState(false)
   const [products, addProducts] = useState([])
-  const handleAddProducts = () => {
-    addProducts([...products, { skuID, programmeId }])
+  const handleAddProduct = () => {
+    addProducts([...products, { skuID, programmeID }])
     setSkuId('')
     setProgrammeId('')
+    handleAddProductModal()
   }
+  const handleDeleteProduct = (productSkuID) => {
+    const deletedProductList = products.filter((product) => product?.skuID !== productSkuID)
+    addProducts(deletedProductList)
+  }
+  const handleAddProductModal = () => {
+    setAddProductModal((prevModalState) => !prevModalState)
+  }
+  const handleOnSubmit = () => {}
   return (
     <div>
       <CampaignHeader>Creat Campaign</CampaignHeader>
@@ -66,51 +93,53 @@ export const Campaign = () => {
       {products?.map((product, index) => {
         return (
           <div key={`campaign-products-${index}`}>
-            <div style={{ display: 'flex' }}>
-              <CampaignSkuId placeholder="SKU ID" value={product?.skuID} />
-              <CampaignProgrammeId placeholder="Programme ID" value={product?.programmeId} />
-            </div>
+            <CampaignInputWrapper>
+              <InputId placeholder="SKU ID" value={product?.skuID} />
+              <InputId placeholder="Programme ID" value={product?.programmeID} />
+              <AddButton color="danger" outline onClick={() => handleDeleteProduct(product?.skuID)}>
+                Delete
+              </AddButton>
+            </CampaignInputWrapper>
           </div>
         )
       })}
-      <div style={{ display: 'flex' }}>
-        <CampaignSkuId placeholder="SKU ID" value={skuID} onChange={(e) => handleSkuIdChange(e)} />
-        <CampaignProgrammeId
+      <CampaignInputWrapper>
+        <InputId placeholder="SKU ID" value={skuID} onChange={(e) => handleSkuIdChange(e)} />
+        <InputId
           placeholder="Programme ID"
-          value={programmeId}
+          value={programmeID}
           onChange={(e) => handleProgrammeIdChange(e)}
         />
-        <AddButton color="success" outline onClick={handleAddProducts}>
+        <AddButton color="success" outline onClick={handleAddProductModal}>
           Add
         </AddButton>
-      </div>
-      {/* <div>
-        <Button color="danger" onClick={function noRefCheck() {}}>
-          Click Me
+      </CampaignInputWrapper>
+      <Modal toggle={handleAddProductModal} isOpen={isAddProductModalOpen}>
+        <ModalHeader toggle={handleAddProductModal}>
+          Do you really want to add the following items
+        </ModalHeader>
+        <ModalBody>
+          <div>{`SKU ID : ${skuID}`}</div>
+          <div> {`Programme ID : ${programmeID}`}</div>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={handleAddProduct}>
+            Yes
+          </Button>{' '}
+          <Button color="danger" onClick={handleAddProductModal}>
+            No
+          </Button>
+        </ModalFooter>
+      </Modal>
+      <CenterContent>
+        <Button color="primary" onClick={handleOnSubmit} style={{ marginTop: '20px' }}>
+          Submit
         </Button>
-        <Modal toggle={function noRefCheck() {}} isOpen={true}>
-          <ModalHeader toggle={function noRefCheck() {}}>Modal title</ModalHeader>
-          <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={function noRefCheck() {}}>
-              Do Something
-            </Button>{' '}
-            <Button onClick={function noRefCheck() {}}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
-      </div> */}
-
-      {console.log(title)}
+      </CenterContent>
+      {/* {console.log(title)}
       {console.log(skuID)}
-      {console.log(programmeId)}
-      {console.log(products)}
+      {console.log(programmeID)}
+      {console.log(products)} */}
     </div>
   )
 }
