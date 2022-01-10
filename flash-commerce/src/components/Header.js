@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   Navbar,
   // NavbarBrand,
@@ -13,6 +14,7 @@ import {
   // NavbarText,
 } from 'reactstrap'
 export const Header = () => {
+  console.log(window.location.href)
   return (
     <div>
       <Navbar color="light" expand="md" light>
@@ -24,21 +26,11 @@ export const Header = () => {
         />
         <Collapse navbar>
           <Nav className="me-auto" navbar>
-            <NavItem>
-              <NavLink
-                onClick={() => {
-                  console.log('test')
-                }}>
-                Product Management
-              </NavLink>
+            <NavItem style={{ margin: '0 5px 0 10px' }}>
+              <Link to="/products">Product Management</Link>
             </NavItem>
-            <NavItem>
-              <NavLink
-                onClick={() => {
-                  console.log('test 2')
-                }}>
-                Campaign Management
-              </NavLink>
+            <NavItem style={{ margin: '0 5px 0 10px' }}>
+              <Link to="/campaigns"> Campaign Management </Link>
             </NavItem>
             {/* <UncontrolledDropdown inNavbar nav>
               <DropdownToggle caret nav>
