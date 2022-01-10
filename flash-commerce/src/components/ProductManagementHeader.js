@@ -11,10 +11,10 @@ export default function ProductManagementHeader ({tab, onChangeTab}) {
                     Add SKU
                 </BreadcrumbItem>
                 <BreadcrumbItem onClick={() => onChangeTab('upload')} className={tab==='upload' ? 'active' : ''}>
-                    Upload
-                </BreadcrumbItem>
                 <BreadcrumbItem onClick={() => onChangeTab('remove')} className={tab==='remove' ? 'active' : ''}>
                     Remove SKU
+                </BreadcrumbItem>
+                    Upload
                 </BreadcrumbItem>
             </Breadcrumb>
     </>
