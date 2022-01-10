@@ -5,8 +5,8 @@ import {
   NavbarToggler,
   Collapse,
   Nav,
-  NavItem,
-  NavLink
+  NavItem
+  // NavLink
   // UncontrolledDropdown,
   // DropdownToggle,
   // DropdownMenu,
@@ -16,7 +16,7 @@ import {
 export const Header = () => {
   console.log(window.location.href)
   return (
-    <div>
+    <div style={{ marginBottom: '10px' }}>
       <Navbar color="light" expand="md" light>
         {/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
         <NavbarToggler
