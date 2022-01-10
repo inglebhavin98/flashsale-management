@@ -2,13 +2,16 @@ import { useState } from 'react'
 import AddProduct from './AddProduct'
 import ProductListing from './ProductListing'
 import ProductManagementHeader from './ProductManagementHeader'
+// import FileUpload from './Upload'
 
 export default function ProductManagement (){
-    const [ selectedTab, setSelectedTab ] = useState('add')
+    const [ selectedTab, setSelectedTab ] = useState('list')
     return <>
         <h3>Product Management</h3>
-        <ProductManagementHeader/>
+        <ProductManagementHeader tab={selectedTab} onChangeTab={setSelectedTab}/>
         {selectedTab === 'list' && <ProductListing/>}
         {selectedTab === 'add' && <AddProduct/>}
+        {selectedTab === 'remove' && <ProductListing deleteRow={true}/>}
+        {/* {selectedTab === 'upload' && <FileUpload/>} */}
     </>
 }
