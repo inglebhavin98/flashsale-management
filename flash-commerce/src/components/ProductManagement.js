@@ -6,6 +6,7 @@ import ProductManagementHeader from './ProductManagementHeader'
 export default function ProductManagement (){
     const [ selectedTab, setSelectedTab ] = useState('add')
     return <>
+        <h3>Product Management</h3>
         <ProductManagementHeader/>
         {selectedTab === 'list' && <ProductListing/>}
         {selectedTab === 'add' && <AddProduct/>}
