@@ -1,17 +1,17 @@
 import {
   Navbar,
-  NavbarBrand,
+  // NavbarBrand,
   NavbarToggler,
   Collapse,
   Nav,
   NavItem,
-  NavLink,
+  NavLink
   // UncontrolledDropdown,
   // DropdownToggle,
   // DropdownMenu,
   // DropdownItem,
   // NavbarText,
-} from "reactstrap";
+} from 'reactstrap'
 export const Header = () => {
   return (
     <div>
@@ -19,7 +19,7 @@ export const Header = () => {
         {/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
         <NavbarToggler
           onClick={() => {
-            console.log("toggle");
+            console.log('toggle')
           }}
         />
         <Collapse navbar>
@@ -27,18 +27,16 @@ export const Header = () => {
             <NavItem>
               <NavLink
                 onClick={() => {
-                  console.log("test");
-                }}
-              >
+                  console.log('test')
+                }}>
                 Product Management
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
                 onClick={() => {
-                  console.log("test 2");
-                }}
-              >
+                  console.log('test 2')
+                }}>
                 Campaign Management
               </NavLink>
             </NavItem>
@@ -58,7 +56,7 @@ export const Header = () => {
         </Collapse>
       </Navbar>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

@@ -4,10 +4,10 @@ import ProductListing from './ProductListing'
 import ProductManagementHeader from './ProductManagementHeader'
 
 export default function ProductManagement (){
-    // const [ selectedTab, setSelectedTab ] = useState('products')
+    const [ selectedTab, setSelectedTab ] = useState('add')
     return <>
         <ProductManagementHeader/>
-        <ProductListing/>
-        <AddProduct/>
+        {selectedTab === 'list' && <ProductListing/>}
+        {selectedTab === 'add' && <AddProduct/>}
     </>
 }

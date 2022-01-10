@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter, Col } from 'reactstrap'
+import { headers } from '../utils/constant'
+import TableView from './TableView'
 
 export default function AddProduct () {
     const [ openSku, setOpenSku] = useState(false)
     const [ skuList, setSkuList] = useState([])
     const [ sku, setSku ] = useState({
         skuId:'',
-        programeId:''
+        programId:''
     })
     const [ skuDetails, setSkuDetails ] = useState({
         skuId:'',
-        programeId:'',
+        programId:'',
         title:'',
         mrp:'',
         currentPrice:'',
@@ -33,9 +35,18 @@ export default function AddProduct () {
     }
 
     const openSkuDetails = () => {
+        //dummy sku details
+        var dummySkuDetails = {
+            title:'SKU 1',
+            mrp:'100',
+            currentPrice:'80',
+            merchPrice:'',
+            saleQuantity:''
+        }
         setSkuDetails(
             {
                 ...skuDetails,
+                ...dummySkuDetails,
                 ...sku
             }
         )
@@ -49,13 +60,28 @@ export default function AddProduct () {
     const addSkuToList = (sku) => {
         setSku({
             skuId:'',
-            programeId:''
+            programId:''
         })
         setSkuList([...skuList,sku])
+        setSkuDetails({
+            skuId:'',
+            programId:'',
+            title:'',
+            mrp:'',
+            currentPrice:'',
+            merchPrice:'',
+            saleQuantity:''
+        })
         setOpenSku(false)
     }
 
+    const deleteRow = (i) => {
+        skuList.splice(i,1)
+        setSkuList([...skuList])
+    }
+
     return <>
+        <TableView heads={headers} rows={skuList} deleteRow={true} deleteRowHandler={deleteRow}/>
         <Form>
             <FormGroup>
                 <Label
@@ -84,10 +110,10 @@ export default function AddProduct () {
                 <Input
                 id="programid"
                 name="programid"
-                value={sku?.programeId}
+                value={sku?.programId}
                 placeholder="Programe ID"
                 type="text"
-                onChange={e => onChangeSkuInput(e,'programeId')}
+                onChange={e => onChangeSkuInput(e,'programId')}
                 />
             </FormGroup>
             {' '}
@@ -120,7 +146,7 @@ export default function AddProduct () {
                             Program ID
                         </Label>
                         <Col sm={8}>
-                            <div>{skuDetails?.programeId}</div>
+                            <div>{skuDetails?.programId}</div>
                         </Col>
                     </FormGroup>
                     <FormGroup row>
@@ -197,7 +223,7 @@ export default function AddProduct () {
             <ModalFooter>
                 <Button
                     color="primary"
-                    onClick={addSkuToList}
+                    onClick={()=>addSkuToList(skuDetails)}
                 >
                     Add Product
                 </Button>
