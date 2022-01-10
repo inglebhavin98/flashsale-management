@@ -1,9 +1,9 @@
 import { headers } from "../utils/constant";
 import TableView from "./TableView";
 
-export default function ProductListing(){
+export default function ProductListing({deleteRow}){
     return <>
-        <TableView heads={headers} rows={data}/>
+        <TableView heads={headers} rows={data} deleteRow/>
     </>
 }
 

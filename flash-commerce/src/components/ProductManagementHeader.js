@@ -1,15 +1,19 @@
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
 
-export default function ProductManagementHeader () {
+export default function ProductManagementHeader ({tab, onChangeTab}) {
+    // debugger
     return <>
         <Breadcrumb>
-                <BreadcrumbItem>
-                    Upload
+                <BreadcrumbItem onClick={() => onChangeTab('list')} className={tab==='list' ? 'active' : ''}>
+                    Products
                 </BreadcrumbItem>
-                <BreadcrumbItem className="active">
+                <BreadcrumbItem onClick={() => onChangeTab('add')} className={tab==='add' ? 'active' : ''}>
                     Add SKU
                 </BreadcrumbItem>
-                <BreadcrumbItem>
+                <BreadcrumbItem onClick={() => onChangeTab('upload')} className={tab==='upload' ? 'active' : ''}>
+                    Upload
+                </BreadcrumbItem>
+                <BreadcrumbItem onClick={() => onChangeTab('remove')} className={tab==='remove' ? 'active' : ''}>
                     Remove SKU
                 </BreadcrumbItem>
             </Breadcrumb>

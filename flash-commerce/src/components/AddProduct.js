@@ -81,7 +81,7 @@ export default function AddProduct () {
     }
 
     return <>
-        <TableView heads={headers} rows={skuList} deleteRow={true} deleteRowHandler={deleteRow}/>
+        {skuList?.length > 0 && <TableView heads={headers} rows={skuList} deleteRow={true} deleteRowHandler={deleteRow}/>}
         <Form>
             <FormGroup>
                 <Label
