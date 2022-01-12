@@ -11,7 +11,7 @@ export default function ProductManagement (){
         <ProductManagementHeader tab={selectedTab} onChangeTab={setSelectedTab}/>
         {selectedTab === 'list' && <ProductListing/>}
         {selectedTab === 'add' && <AddProduct/>}
-        {selectedTab === 'remove' && <ProductListing deleteRow={true}/>}
+        {selectedTab === 'remove' && <ProductListing checkboxes={true}/>}
         {/* {selectedTab === 'upload' && <FileUpload/>} */}
     </>
 }
